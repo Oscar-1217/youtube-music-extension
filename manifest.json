@@ -1,0 +1,28 @@
+{
+    "manifest_version": 3,
+    "name": "NBA score checker",
+    "version": "1.0",
+
+    "description": "Check NBA games",
+
+    "permissions": ["tabs"],
+
+    "host_permissions": ["*://music.youtube.com/*"],
+
+    "icons": {
+        "48": "images/image.png"
+    },
+
+    "action": {
+        "default_icon": "images/image.png",
+        "default_popup": "src/menu.html",
+        "default_title": "Youtube Music Pop-up"
+    },
+
+    "content_scripts": [
+        {
+            "matches": ["*://music.youtube.com/*"],
+            "js": ["content.js"]
+        }
+    ]
+}
