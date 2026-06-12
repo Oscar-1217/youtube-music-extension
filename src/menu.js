@@ -23,5 +23,22 @@ async function loadSong() {
     document.getElementById("title").textContent = response.message;
 }
 
-// update song title every 0.5 sec
-setInterval(loadSong, 500);
+// Get song changed on runtime
+browser.runtime.onMessage.addListener((message) => {
+    if (message.action === "songChanged") {
+        document.getElementById("title").textContent = message.title;
+    }
+});
+
+
+function prevSong() {
+
+}
+
+function nextSong() {
+
+}
+
+function playPause() {
+
+}

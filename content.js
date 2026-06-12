@@ -25,3 +25,14 @@ browser.runtime.onMessage.addListener(async (message) => {
 
     }
 });
+
+// Observe play bar title changed
+const target = document.querySelector(".title.style-scope.ytmusic-player-bar");
+const observer = new MutationObserver(() => {
+    console.log("Song title changed: ", target.textContent);
+    browser.runtime.sendMessage({
+        action: "songChanged",
+        title: target.textContent
+    });
+});
+observer.observe(target, {childList: true, characterData: true, subtree: true});
