@@ -14,19 +14,33 @@ async function loadSong() {
     }
 
     // is opened, send message to get song
-    const response = await browser.tabs.sendMessage(
+    const titleResponse = await browser.tabs.sendMessage(
         tabs[0].id,
         { action: "getSong" }
     );
 
     // update song title
-    document.getElementById("title").textContent = response.message;
+    document.getElementById("title").textContent = titleResponse.message;
+
+    // update song album
+    const photoResponse = await browser.tabs.sendMessage(
+        tabs[0].id,
+        { action: "getPhoto" }
+    );
+
+    const album = document.getElementById("album");
+
+    const img = document.createElement("img");
+    img.src = photoResponse.img;
+
+    album.replaceChildren(img);
 }
 
 // Get song changed on runtime
 browser.runtime.onMessage.addListener((message) => {
     if (message.action === "songChanged") {
         document.getElementById("title").textContent = message.title;
+        document.getElementsByTagName("img")[0].src = message.album;
     }
 });
 

@@ -6,7 +6,7 @@ browser.runtime.onMessage.addListener(async (message) => {
     if (message.action === "getSong") {
         var songTitle = document.querySelector(".title.style-scope.ytmusic-player-bar").textContent;
         return {
-            message: songTitle,
+            message: songTitle
         };
     }
 
@@ -36,15 +36,24 @@ browser.runtime.onMessage.addListener(async (message) => {
             action: "clicked"
         };
     }
+
+    if (message.action === "getPhoto") {
+        var image = document.querySelector(".thumbnail-image-wrapper.style-scope.ytmusic-player-bar").querySelector(".image.style-scope.ytmusic-player-bar");
+        return {
+            img: image?.src
+        };
+    }
 });
 
 // Observe play bar title changed
 const target = document.querySelector(".title.style-scope.ytmusic-player-bar");
+const image = document.querySelector(".thumbnail-image-wrapper.style-scope.ytmusic-player-bar").querySelector(".image.style-scope.ytmusic-player-bar");
 const observer = new MutationObserver(() => {
     console.log("Song title changed: ", target.textContent);
     browser.runtime.sendMessage({
         action: "songChanged",
-        title: target.textContent
+        title: target.textContent,
+        album: image.src
     });
 });
 observer.observe(target, {childList: true, characterData: true, subtree: true});
