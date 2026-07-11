@@ -5,3 +5,22 @@
         button style,
         bar style?
 */
+
+body {
+    background-color: black;
+}
+
+#topbar {
+    height: 10px
+}
+
+#album, #title, #playBar {
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+}
+
+#album img {
+    border-radius: 2px;
+}
