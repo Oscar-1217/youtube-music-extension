@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Youtube Music Pop-up",
-    "version": "1.0.1"
+    "version": "1.0.1",
 
     "description": "Allows you to Play/Pause/Play next/Play previous from another tab",
 
